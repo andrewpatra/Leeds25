@@ -4,9 +4,9 @@ import vlc
 
 # 1. Add your video file paths here (can be any amount, e.g., 4, 12, or 25!)
 video_files = [
-    "/home/pi/videos/video0.mp4",
-    "/home/pi/videos/video1.mp4",
-    "/home/pi/videos/video2.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/1.jpg",
+    "/home/andrewp/Desktop/Leeds25/Assets/2.jpg",
+    "home/andrewp/Desktop/Leeds25/Assets/3.jpg",
     # ... add all your files here
 ]
 num_videos = len(video_files)
@@ -31,7 +31,7 @@ current_index = 0
 players[current_index].set_pause(0) # Start playing the first video
 players[current_index].audio_set_mute(False)
 
-print("System initialized. Massive knob ready!")
+print("Ready.")
 
 try:
     while True:
