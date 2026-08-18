@@ -34,9 +34,8 @@ encoder = RotaryEncoder(
     max_steps=0
 )
 
-
 # ------------------------------------------------------------
-# VLC
+# VLC -- Initializes a single frame - make sure to update video files to match monitor size
 # ------------------------------------------------------------
 
 instance = vlc.Instance(
@@ -80,8 +79,8 @@ play_video(0)
 # Remember where the encoder started
 last_encoder_step = encoder.steps
 
-print("System initialized.")
-print("Turn the encoder to change videos.")
+print("Ready.")
+print(current_index)
 
 
 # ------------------------------------------------------------
