@@ -22,9 +22,9 @@ import vlc
 
 # 1. Add your video file paths here
 video_files = [
-    "/home/pi/videos/video0.mp4",
-    "/home/pi/videos/video1.mp4",
-    "/home/pi/videos/video2.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/1.jpg",
+    "/home/andrewp/Desktop/Leeds25/Assets/2.jpg",
+    "/home/andrewp/Desktop/Leeds25/Assets/3.jpg",
     # Add additional videos here
 ]
 
