@@ -7,7 +7,8 @@ import vlc
 # ------------------------------------------------------------
 
 video_files = [
-    "/home/andrewp/Desktop/Leeds25/Assets/1.jpg",
+    #"/home/andrewp/Desktop/Leeds25/Assets/1.jpg",
+    "/home/andrewp/Desktop/Leeds25/Assets/1.mp4",
     "/home/andrewp/Desktop/Leeds25/Assets/2.jpg",
     "/home/andrewp/Desktop/Leeds25/Assets/3.jpg",
     # Add more videos here
@@ -40,7 +41,7 @@ encoder = RotaryEncoder(
 
 instance = vlc.Instance(
     "--no-osd",
-    "--fullscreen"
+    "--fullscreen",
 )
 
 player = instance.media_player_new()
@@ -70,6 +71,7 @@ def play_video(index):
 
     # Play it
     player.play()
+    sleep(1)
 
 
 # Start with the first video
