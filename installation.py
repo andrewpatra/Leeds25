@@ -38,38 +38,29 @@ encoder = RotaryEncoder(
 # VLC -- Initializes a single frame - make sure to update video files to match monitor size
 # ------------------------------------------------------------
 
+# Create one VLC instance
 instance = vlc.Instance(
     "--no-osd",
     "--fullscreen"
+    "--mouse-hide-timeout=0"
 )
 
+# Create one player
 player = instance.media_player_new()
 
-
-# ------------------------------------------------------------
-# VIDEO CONTROL
-# ------------------------------------------------------------
-
-current_index = 0
+# Force fullscreen
+player.set_fullscreen(True)
 
 
 def play_video(index):
-    """Load and play one video."""
-
-    global current_index
-
-    current_index = index
-
-    print(f"Playing video {current_index}: {video_files[current_index]}")
-
-    # Create VLC media object for the selected video
-    media = instance.media_new(video_files[current_index])
-
-    # Give the media to our ONE player
+    media = instance.media_new(video_files[index])
     player.set_media(media)
-
-    # Play it
     player.play()
+
+    # Make sure we remain fullscreen
+    player.set_fullscreen(True)
+
+    print(f"Playing video {index}: {video_files[index]}")
 
 
 # Start with the first video
