@@ -7,11 +7,31 @@ import vlc
 # ------------------------------------------------------------
 
 video_files = [
-    #"/home/andrewp/Desktop/Leeds25/Assets/1.jpg",
     "/home/andrewp/Desktop/Leeds25/Assets/1.mp4",
-    "/home/andrewp/Desktop/Leeds25/Assets/2.jpg",
-    "/home/andrewp/Desktop/Leeds25/Assets/3.jpg",
-    # Add more videos here
+    "/home/andrewp/Desktop/Leeds25/Assets/2.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/3.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/4.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/5.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/6.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/7.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/8.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/9.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/10.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/11.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/12.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/13.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/14.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/15.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/16.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/17.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/18.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/19.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/20.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/21.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/22.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/23.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/24.mp4",
+    "/home/andrewp/Desktop/Leeds25/Assets/25.mp4",
 ]
 
 num_videos = len(video_files)
@@ -35,16 +55,28 @@ encoder = RotaryEncoder(
     max_steps=0
 )
 
+
 # ------------------------------------------------------------
-# VLC -- Initializes a single frame - make sure to update video files to match monitor size
+# VLC -- ONE PLAYER + MEDIA LIST PLAYER
 # ------------------------------------------------------------
 
 instance = vlc.Instance(
     "--no-osd",
-    "--fullscreen",
+    "--fullscreen"
 )
 
+# The MediaListPlayer manages switching between media while
+# using one underlying VLC media player/window.
 player = instance.media_player_new()
+media_list = instance.media_list_new()
+
+for file_path in video_files:
+    media = instance.media_new(file_path)
+    media_list.add_media(media)
+
+list_player = instance.media_list_player_new()
+list_player.set_media_player(player)
+list_player.set_media_list(media_list)
 
 
 # ------------------------------------------------------------
@@ -55,7 +87,7 @@ current_index = 0
 
 
 def play_video(index):
-    """Load and play one video."""
+    """Play the selected item from the VLC media list."""
 
     global current_index
 
@@ -63,15 +95,8 @@ def play_video(index):
 
     print(f"Playing video {current_index}: {video_files[current_index]}")
 
-    # Create VLC media object for the selected video
-    media = instance.media_new(video_files[current_index])
-
-    # Give the media to our ONE player
-    player.set_media(media)
-
-    # Play it
-    player.play()
-    sleep(1)
+    # Switch to the selected item in the existing VLC player.
+    list_player.play_item_at_index(current_index)
 
 
 # Start with the first video
@@ -135,4 +160,5 @@ except KeyboardInterrupt:
 
     print("\nStopping...")
 
+    list_player.stop()
     player.stop()
